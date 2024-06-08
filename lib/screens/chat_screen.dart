@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jump_ais/constants/colors.dart';
 import 'package:jump_ais/widgets/chat_top_bar_widget.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:jump_ais/widgets/message_section_widget.dart';
+import 'package:jump_ais/widgets/suggestion_messages_widget.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -11,147 +10,78 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const ChatTopBarWidget(),
-          Flexible(child: Container()),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 40,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  margin: const EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "วิธีตั้งค่าโปรไฟล์",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: textColor,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "วิธีตั้งค่าโปรไฟล์",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: textColor,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "วิธีตั้งค่าโปรไฟล์",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: textColor,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "วิธีตั้งค่าโปรไฟล์",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: textColor,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 50),
-                color: Colors.white,
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextField(
-                          style: const TextStyle(fontSize: 20),
-                          decoration: InputDecoration(
-                            hintText: "แตะที่นี่เพื่อพิมพ์ข้อความ",
-                            hintStyle: const TextStyle(
-                              color: textColor,
-                              fontSize: 20,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey[300]!,
-                                width: 2,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey[300]!,
-                                width: 2,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        LineIcons.microphone,
-                        size: 32,
-                      ),
-                    ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 100),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  padding: const EdgeInsets.all(0),
+                  children: const [
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    MessageWidget(),
+                    const SizedBox(height: 200),
                   ],
                 ),
-              )
+              ),
+            ),
+            const ChatTopBarWidget(),
+            // const SizedBox(height: 20),
+            const MessageSectionWidget(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MessageWidget extends StatelessWidget {
+  const MessageWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 40),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CircleAvatar(),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("หลานสอน"),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.5,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 0.5,
+                        offset: Offset(0, 2),
+                      )
+                    ]),
+                child: const Text(
+                    "lorem ipsum asldjaslkdjaslkdjljlkaj lajsdl ajsldj ajdlasjdlk ajsld ajld ajlsdj lakj lkaj dlajk ajsl kdjkaljd lkajslkdjljalssd"),
+              ),
             ],
-          ),
+          )
         ],
       ),
     );
